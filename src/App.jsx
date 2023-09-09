@@ -1,24 +1,21 @@
-import Header from "./components/Header"
-import Formularios from "./components/Formularios"
-import ListadoPacientes from "./components/ListadoPacientes"
+import Header from "./components/Header";
+import Formularios from "./components/Formularios";
+import ListadoPacientes from "./components/ListadoPacientes";
 
 function App() {
-  
-
-
-
   return (
     <>
- 
-      <div>
-      <Header/>
-      <Formularios/>
-    <ListadoPacientes/>
+      <div className="container mx-auto mt-20">
+        <Header />
+        <div className="mt-12 md:flex">
+        <Formularios />
+        <ListadoPacientes />
 
+        </div>
+ 
       </div>
-      
     </>
-  )
+  );
 }
 
-export default App
+export default App;
