@@ -1,6 +1,8 @@
-const Paciente = ({paciente}) => {
+import {useEffect} from "react"
+const Paciente = ({ paciente, setPaciente }) => {
 
-  const {nombre,propietario,email,fecha,sintomas} = paciente
+
+  const { nombre, propietario, email, fecha, sintomas } = paciente;
   return (
     <div className="mx-5 my-10 bg-white shadow-md px-5 py-10 rounded-xl">
       <p className="font-bold mb-3 text-gray-700 uppercase text-sm">
@@ -21,9 +23,26 @@ const Paciente = ({paciente}) => {
       </p>
 
       <p className="font-bold mb-3 text-gray-700 uppercase text-sm">
-          Sintomas: {""}
+        Sintomas: {""}
         <span className="font-normal normal-case">{sintomas}</span>
       </p>
+
+      <div className="flex justify-between mt-10">
+        <button
+          className="py-2 px-10 bg-indigo-600 hover:bg-indigo-800 text-center text-white font-bold uppercase rounded-md"
+          type="button"
+          onClick={() => setPaciente(paciente)}
+        >
+          editar
+        </button>
+
+        <button
+          className="py-2 px-10 bg-red-600 hover:bg-red-800 text-center text-white font-bold uppercase rounded-md"
+          type="button"
+        >
+          eliminar
+        </button>
+      </div>
     </div>
   );
 };
