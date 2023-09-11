@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import Error from "./Error";
 
-const Formularios = ({ pacientes, setPacientes, paciente }) => {
+const Formularios = ({ pacientes, setPacientes, paciente, setPaciente }) => {
   const [nombre, setNombre] = useState("");
   const [propietario, setPropietario] = useState("");
   const [email, setEmail] = useState("");
@@ -10,25 +10,19 @@ const Formularios = ({ pacientes, setPacientes, paciente }) => {
   const [error, setError] = useState(false);
 
   useEffect(() => {
-    if(Object.keys(paciente).length > 0)
-    {
+    if (Object.keys(paciente).length > 0) {
       setNombre(paciente.nombre);
-      setPropietario(paciente.propietario); 
+      setPropietario(paciente.propietario);
       setEmail(paciente.email);
       setFecha(paciente.fecha);
       setSintomas(paciente.sintomas);
-
-    
-
     }
-   },[paciente]);
+  }, [paciente]);
 
   const generarId = () => {
-
     const random = Math.random().toString(36).substr(2);
 
-    const fecha = Date.now().toString(36)
-
+    const fecha = Date.now().toString(36);
 
     return random + fecha;
   };
@@ -50,9 +44,21 @@ const Formularios = ({ pacientes, setPacientes, paciente }) => {
       email,
       fecha,
       sintomas,
-      id: generarId()
     };
-    setPacientes([...pacientes, ojbetoPaciente]);
+
+    if (paciente.id) {
+      ojbetoPaciente.id = paciente.id;
+
+      const  pacientesActualizados = pacientes.map(pacientState => pacientState.id === paciente.id ? ojbetoPaciente : pacientState);
+
+      setPacientes(pacientesActualizados);
+      setPaciente({})
+
+
+    } else {
+      ojbetoPaciente.id = generarId();
+      setPacientes([...pacientes, ojbetoPaciente]);
+    }
 
     //reiniciar forumulario
     setNombre("");
@@ -170,7 +176,7 @@ const Formularios = ({ pacientes, setPacientes, paciente }) => {
         <input
           type="submit"
           className="bg-indigo-600 w-full p-3 text-white uppercase font-bold hover:bg-indigo-800 cursor-pointer transition-colors"
-          value={paciente.id ? 'Editar Paciente' : 'Agregar paciente'}
+          value={paciente.id ? "Editar Paciente" : "Agregar paciente"}
           name=""
           id=""
         />
